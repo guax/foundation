@@ -1,0 +1,6 @@
+---
+- hosts: terminus
+  remote_user: ansible
+  roles:
+  - raspberry
+  - common
