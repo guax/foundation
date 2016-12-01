@@ -1,0 +1,6 @@
+
+[raspis]
+terminus ansible_host=192.168.0.9
+
+[foundation:children]
+raspis

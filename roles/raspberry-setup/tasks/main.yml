@@ -1,0 +1,23 @@
+---
+# RaspberryPi bootstrap
+- name: Create user ansible
+  remote_user: pi
+  become: true
+  user: name=ansible generate_ssh_key=yes ssh_key_bits=4096
+
+- name: Add guax keys to the raspberry
+  remote_user: pi
+  become: true
+  authorized_key: user=ansible key=https://github.com/guax.keys
+
+- name: Lock ansible user
+  remote_user: ansible
+  shell: passwd -l ansible
+  ignore_errors: true
+
+- name: Ensure user ansible have sudo rights
+  remote_user: pi
+  become: true
+  template: src={{item}} dest=/etc/{{item}} validate='/usr/sbin/visudo -cf %s' owner=root group=root mode=0440
+  with_items:
+    - sudoers.d/ansible

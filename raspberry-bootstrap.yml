@@ -1,0 +1,6 @@
+---
+# Make sure all raspberry pies are configured correctly
+- hosts: raspis
+  remote_user: pi
+  roles:
+  - raspberry-setup
