@@ -3,6 +3,6 @@
   become: yes
   user: name=guax group=users generate_ssh_key=yes ssh_key_bits=4096
 
-- name: Add guax keys to the raspberry
+- name: Add published ssh keys
   become: true
   authorized_key: user=guax key=https://github.com/guax.keys

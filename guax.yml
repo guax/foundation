@@ -1,0 +1,9 @@
+---
+# Setup up my shell preferences
+
+- hosts: all
+  remote_user: guax
+  roles:
+    - dotfiles
+  vars:
+    remote_user: guax

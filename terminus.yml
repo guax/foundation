@@ -4,3 +4,4 @@
   roles:
   - raspberry
   - common
+  - debian-base

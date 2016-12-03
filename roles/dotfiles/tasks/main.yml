@@ -1,0 +1,21 @@
+---
+# Ensure we have my bash environment
+
+- name: Clone oh-my-zsh
+  git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest=/home/{{ remote_user }}/.oh-my-zsh
+
+- name: Clone dotfiles
+  git: repo=https://github.com/guax/dotfiles.git dest=/home/{{ remote_user }}/.dotfiles
+
+- name: Remove any current .zshrc
+  file: path=/home/{{ remote_user }}/.zshrc state=absent
+
+- name: Link zshrc from dotfiles
+  file: path=/home/{{ remote_user }}/.zshrc src=/home/{{ remote_user }}/.dotfiles/zshrc state=link
+
+- name: Link vimrc from dotfiles
+  file: path=/home/{{ remote_user }}/.vimrc src=/home/{{ remote_user }}/.dotfiles/vimrc state=link
+
+- name: Make zsh the default shell
+  become: true
+  user: name={{ remote_user }} shell=/bin/zsh
